@@ -53,9 +53,9 @@
                             
                         </p>
                     </div>
-                    <input class="input is-rounded" type="text" placeholder="Rounded input">
+                    <input id= "blank" class="input is-rounded" type="text" placeholder="Rounded input">
 
-                    <button class="button  is-warning">Next</button>
+                    <button id= "next-button" class="button  is-warning">Next</button>
                     <nav class="level is-mobile">
 
 
@@ -65,6 +65,7 @@
 
         </div>
         </article>
+        <p id= "fill-blank"></p>
     </div>
     </div>
     </a>
@@ -73,9 +74,8 @@
 
     
 
-    <!-- <input id= "blank">
-    <button id= "next-button">BUTTON!</button>
-    <p id= "fill-blank"></p> -->
+
+    
     
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -84,7 +84,8 @@
     $("#next-button").on("click", function() {
 
         var blank = $("#blank").val().trim();
-
+        var storeGif = localStorage.setItem("Gifs" + count, [])
+        var count = 0
         var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=mAZatgWo6T9hgzFNKRIFDeLp5AIdXStq&tag=" + blank ;
 
       // Perfoming an AJAX GET request to our queryURL
@@ -103,7 +104,7 @@
             // Creating and storing an image tag
             var gif = $("<img>");
 
-            // // Setting the catImage src attribute to imageUrl
+            // // Setting the gif src attribute to imageUrl
             gif.attr("src", imageUrl);
             gif.attr("alt", "cat image");
 
@@ -111,6 +112,41 @@
             $("#fill-blank").prepend(gif);
             });
         });
+
+
+    // madlibs AJAX
+    $("#next-button").on("click", function() {
+
+        var queryURL = "http://madlibz.herokuapp.com/api/random";
+
+        // Perfoming an AJAX GET request to our queryURL
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        })
+        .then(function(response) {
+            console.log(response)
+
+        // // Prepending the value and blanks to the html
+
+            var blanksCount = 0;
+            var valuesCount = 0;
+
+            for(var i = 0; i < response.value.length; i++){
+
+            if(i % 2 == 0){
+                console.log(response.value[i]);
+                valuesCount++
+            } else if (i % 2 == 1){
+                console.log(response.blanks[i]);
+                blanksCount++
+            }
+            }
+            // $("#fill-blank").append(response.value);
+            // $("#fill-blank").append(response.blanks);
+        });
+        });
+
   </script>
 
 
