@@ -80,12 +80,16 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
+
+    var count = 0;
+    function startGame(){
+        count = 0;
+    }
+
     // Event listener for our cat-button
     $("#next-button").on("click", function() {
 
         var blank = $("#blank").val().trim();
-        var storeGif = localStorage.setItem("Gifs" + count, [])
-        var count = 0
         var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=mAZatgWo6T9hgzFNKRIFDeLp5AIdXStq&tag=" + blank ;
 
       // Perfoming an AJAX GET request to our queryURL
@@ -94,13 +98,18 @@
             method: "GET"
         })
 
+
         // After the data from the AJAX request comes back
             .then(function(response) {
 
+            
             // Saving the image_original_url property
             var imageUrl = response.data.image_original_url;
             console.log(imageUrl);
 
+            localStorage.setItem(count, imageUrl);
+            count++;
+          
             // Creating and storing an image tag
             var gif = $("<img>");
 
@@ -111,11 +120,16 @@
             // // Prepending the gif to the images div
             $("#fill-blank").prepend(gif);
             });
+
+
+            // for (i = 0; i < madlibzResponse.blanks.length; i++){
+            //     $("#blank").attr("placeholder", madlibzResponse.blanks[i])
+            // }
         });
 
 
     // madlibs AJAX
-    $("#next-button").on("click", function() {
+    
 
         var queryURL = "http://madlibz.herokuapp.com/api/random";
 
@@ -124,29 +138,32 @@
             url: queryURL,
             method: "GET"
         })
-        .then(function(response) {
-            console.log(response)
+        .then(function(madlibzResponse) {
+            console.log(madlibzResponse)
 
         // // Prepending the value and blanks to the html
 
             var blanksCount = 0;
             var valuesCount = 0;
 
-            for(var i = 0; i < response.value.length; i++){
+            for(var i = 0; i < madlibzResponse.value.length + madlibzResponse.blanks.length; i++){
 
             if(i % 2 == 0){
-                console.log(response.value[i]);
+                console.log(madlibzResponse.value[valuesCount]);
                 valuesCount++
-            } else if (i % 2 == 1){
-                console.log(response.blanks[i]);
+            } else if (i % 2 == 1 && blanksCount < madlibzResponse.blanks.length ){
+                console.log(madlibzResponse.blanks[blanksCount]);
                 blanksCount++
             }
             }
             // $("#fill-blank").append(response.value);
             // $("#fill-blank").append(response.blanks);
+            
+            $("#blank").attr("placeholder", madlibzResponse.blanks[0])
+        
         });
-        });
-
+        
+        startGame()
   </script>
 
 
