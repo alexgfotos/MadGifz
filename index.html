@@ -67,7 +67,7 @@
 
         </div>
         </article>
-        <p id="fill-blank"></p>
+        <div id="fill-blank"></div>
     </div>
     </div>
     </a>
@@ -99,11 +99,34 @@
 
         var madlibz;
         var count = 0;
-
+        var madlibzValue = [];
         function startGame() {
             count = 0;
         }
+        function generate() {
+            console.log("generate");
+            var totalCount=parseInt(localStorage.getItem("totalCount"));
+            console.log(totalCount,madlibzValue);
+            for (var i = 0; i < totalCount; i++) {
 
+                if (i % 2 == 0) {
+                    console.log(madlibzValue[i]);
+                    var sentence = $("<h2>");
+                    sentence.text(madlibzValue[i]);
+                    $("#fill-blank").append(sentence);
+                   
+                }
+                 else if (i % 2 == 1) {
+                    var image = $("<img>")
+                    image.attr("src", localStorage.getItem(i));
+                    $("#fill-blank").append(image)
+                    console.log(localStorage.getItem(i));
+               
+                }
+
+            }
+
+        }
         // Event listener for our cat-button
         $("#next-button").on("click", function () {
             event.preventDefault();
@@ -174,6 +197,8 @@
                     $("#submit").on("click", function () {
                         event.preventDefault();
                         console.log("submit");
+                        generate();
+                        console.log(madlibzValue);
                     })
                 });
 
@@ -203,12 +228,14 @@
 
                     if (i % 2 == 0) {
                         console.log(madlibzResponse.value[valuesCount]);
+                        madlibzValue.push(madlibzResponse.value[valuesCount]);
                         valuesCount++
                     } else if (i % 2 == 1 && blanksCount < madlibzResponse.blanks.length) {
                         console.log(madlibzResponse.blanks[blanksCount]);
                         blanksCount++
                     }
                     localStorage.setItem("count", blanksCount);
+                    localStorage.setItem("totalCount", blanksCount + valuesCount);
                 }
                 // $("#fill-blank").append(response.value);
                 // $("#fill-blank").append(response.blanks);
