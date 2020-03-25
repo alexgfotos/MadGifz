@@ -38,7 +38,7 @@
                     <h2>Global Libray</h2>
                 </a>
     </nav>
-    <div class="container">
+    <div id="user-input" class="container">
         <div class="box">
             <article class="media">
                 <div class="media-left">
@@ -96,6 +96,8 @@
                 $("#next-button").click();
             }
         })
+
+        var madlibz;
         var count = 0;
 
         function startGame() {
@@ -105,10 +107,30 @@
         // Event listener for our cat-button
         $("#next-button").on("click", function () {
             event.preventDefault();
-
             var blank = $("#blank").val().trim();
             var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=mAZatgWo6T9hgzFNKRIFDeLp5AIdXStq&tag=" + blank;
-            $("#blank").val("");
+
+
+            if (count > madlibz.blanks.length) {
+                $("#next-button").hide();
+                var finishButton = $("<button>");
+                finishButton.text("Finish!");
+                finishButton.attr("class", "button");
+                $("#input-box").append(finishButton);
+
+                finishButton.on("click", function () {
+                    generate();
+                })
+
+
+
+
+            }
+
+            $("#blank").attr("placeholder", madlibz.blanks[count])
+
+
+
             // Perfoming an AJAX GET request to our queryURL
             $.ajax({
                 url: queryURL,
@@ -155,12 +177,6 @@
                     })
                 });
 
-
-
-
-            // for (i = 0; i < madlibzResponse.blanks.length; i++){
-            //     $("#blank").attr("placeholder", madlibzResponse.blanks[i])
-            // }
         });
 
 
@@ -176,6 +192,7 @@
         })
             .then(function (madlibzResponse) {
                 console.log(madlibzResponse)
+                madlibz = madlibzResponse
 
                 // // Prepending the value and blanks to the html
 
@@ -207,8 +224,8 @@
 
 
         startGame()
-    </script>
 
+    </script>
 
 </body>
 
