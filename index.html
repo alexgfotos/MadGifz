@@ -94,6 +94,7 @@
         $("#blank").keyup(function (event) {
             if (event.keyCode === 13) {
                 $("#next-button").click();
+                $("#submit").click();
             }
         })
 
@@ -105,8 +106,8 @@
         }
         function generate() {
             console.log("generate");
-            var totalCount=parseInt(localStorage.getItem("totalCount"));
-            console.log(totalCount,madlibzValue);
+            var totalCount = parseInt(localStorage.getItem("totalCount"));
+            console.log(totalCount, madlibzValue);
             for (var i = 0; i < totalCount; i++) {
 
                 if (i % 2 == 0) {
@@ -114,14 +115,25 @@
                     var sentence = $("<h2>");
                     sentence.text(madlibzValue[i]);
                     $("#fill-blank").append(sentence);
-                   
-                }
-                 else if (i % 2 == 1) {
+
                     var image = $("<img>")
                     image.attr("src", localStorage.getItem(i));
                     $("#fill-blank").append(image)
                     console.log(localStorage.getItem(i));
-               
+
+
+                }
+                else if (i % 2 == 1) {                    
+                    var sentence = $("<h2>");
+                    sentence.text(madlibzValue[i]);
+                    $("#fill-blank").append(sentence);
+
+                    var image = $("<img>")
+                    image.attr("src", localStorage.getItem(i));   
+                    $("#fill-blank").append(image)
+                    console.log(localStorage.getItem(i));
+                    console.log(madlibzValue[i]);
+
                 }
 
             }
@@ -130,9 +142,10 @@
         // Event listener for our cat-button
         $("#next-button").on("click", function () {
             event.preventDefault();
+
             var blank = $("#blank").val().trim();
             var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=mAZatgWo6T9hgzFNKRIFDeLp5AIdXStq&tag=" + blank;
-
+            $("#blank").val("");
 
             if (count > madlibz.blanks.length) {
                 $("#next-button").hide();
