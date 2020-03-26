@@ -28,7 +28,7 @@
             </div>
         </div>
     </section>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="">
                 <h2>Your Libray</h2>
@@ -37,7 +37,7 @@
                 <a class="navbar-item" href="">
                     <h2>Global Libray</h2>
                 </a>
-    </nav>
+    </nav> -->
     <div class="background">
         <div id="user-input" class="container">
             <div class="box">
@@ -117,21 +117,27 @@
                     sentence.text(madlibzValue[i]);
                     $("#fill-blank").append(sentence);
 
+                    var image = $("<img>")
+                    image.attr("src", localStorage.getItem(i));
+                    $("#fill-blank").append(image)
+                    console.log(localStorage.getItem(i));
+                    console.log(madlibzValue[i]);
+
 
                 }
-                else if (i % 2 == 1) {                    
+                else if (i % 2 == 1) {
                     var sentence = $("<h2>");
                     sentence.text(madlibzValue[i]);
                     $("#fill-blank").append(sentence);
 
                     var image = $("<img>")
-                    image.attr("src", localStorage.getItem(i));   
+                    image.attr("src", localStorage.getItem(i));
                     $("#fill-blank").append(image)
                     console.log(localStorage.getItem(i));
                     console.log(madlibzValue[i]);
 
                 }
-
+                
             }
 
         }
@@ -175,24 +181,14 @@
 
 
                     // Saving the image_original_url property
-                    var imageUrl = response.data.image_original_url;
+                    var imageUrl = response.data.fixed_height_downsampled_url;
+                    console.log(response)
                     console.log(imageUrl);
 
                     localStorage.setItem(count, imageUrl);
                     count++;
 
-                    // //delete eventually
-                    // // Creating and storing an image tag
-                    // var gif = $("<img>");
-
-                    // // // Setting the gif src attribute to imageUrl
-                    // gif.attr("src", imageUrl);
-
-
-                    // // // Prepending the gif to the images div
-                    // $("#fill-blank").prepend(gif);
-
-                    // Function to make the finish button
+                    
                     if (count == localStorage.getItem("count")) {
 
                         console.log("the end");
@@ -245,6 +241,7 @@
                     }
                     localStorage.setItem("count", blanksCount);
                     localStorage.setItem("totalCount", blanksCount + valuesCount);
+                    localStorage.setItem("valuesCount", valuesCount);
                 }
                 // $("#fill-blank").append(response.value);
                 // $("#fill-blank").append(response.blanks);
