@@ -5,26 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Shadows+Into+Light&display=swap" rel="stylesheet">
     <!--Bulma-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
     <!-- CSS Links-->
     <link rel="stylesheet" href="style.css">
-    <title>MadGIPHZ</title>
+    <title>MadGifz</title>
 </head>
 
 <body>
-    <section class="hero is-primary">
+    <section class="hero">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">
-                    MadGIPHZ
+                    MadGifz
                 </h1>
-                <h2 class="subtitle">
-                    add something clever
-                </h2>
-                <br>
             </div>
         </div>
     </section>
@@ -43,18 +40,10 @@
             <div class="box">
                 <article class="media">
                     <div class="media-left">
-                        <figure class="image is-64x64">
-                            <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
-                        </figure>
                     </div>
                     <div class="media-content" id="userInput">
-                        <div class="content">
-
-
-                            <p>
-                                <strong>Let's Play!</strong>
-
-                            </p>
+                        <div id = "prompt" class="content">
+                            <strong>Create a MadGif!</strong>
                         </div>
                         <input id="blank" class="input is-rounded" type="text" placeholder="Rounded input">
 
@@ -70,19 +59,18 @@
             </article>
             <div id="fill-blank"></div>
         </div>
+
+        <footer>
+            <div class="container footer">
+                <h1>
+                    MadGifz by The Cat Gifz
+                </h1>
+            </div>
+        </footer>
+    </div>
     </div>
     </div>
     </nav>
-    </div>
-
-    <footer class="footer">
-        <div class="content has-text-centered">
-            <p>
-                <strong>MadGIPHZ</strong> by Alex the Awesome,
-                Cassy the Cat, Veronica the Victorious
-            </p>
-        </div>
-    </footer>
 
 
 
@@ -106,6 +94,7 @@
             count = 0;
         }
         function generate() {
+            $(".box").hide();
             console.log("generate");
             var totalCount = parseInt(localStorage.getItem("totalCount"));
             console.log(totalCount, madlibzValue);
@@ -137,7 +126,7 @@
                     console.log(madlibzValue[i]);
 
                 }
-                
+
             }
 
         }
@@ -188,7 +177,7 @@
                     localStorage.setItem(count, imageUrl);
                     count++;
 
-                    
+
                     if (count == localStorage.getItem("count")) {
 
                         console.log("the end");
