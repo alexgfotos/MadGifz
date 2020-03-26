@@ -1,3 +1,9 @@
+body {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
 .hero-body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     background-image: url("https://cdnb.artstation.com/p/assets/images/images/006/272/147/large/jack-oldham-mountain-galaxy-background-1.jpg?1497300224");
@@ -12,14 +18,28 @@
 }
  
 .footer {
-    position: fixed;
-    bottom:0;
+    /* /* position: absolute; */
+    bottom:0; 
+    background-attachment: scroll;
     width: 100%;
-    height:40px;
+    height:20px;
 }
 
 .background {
     background-image: url("https://www.dw.com/image/45348566_303.jpg");
     width:100%;
     height: 100%;
+}
+
+.box {
+    background-color: rgba(100, 100, 100, .7);
+    border: 4px solid white;
+    border-radius: 2rem;
+}
+
+#user-input {
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+    width: 90vh;
 }
