@@ -17,3 +17,9 @@
     width: 100%;
     height:40px;
 }
+
+.background {
+    background-image: url("https://www.dw.com/image/45348566_303.jpg");
+    width:100%;
+    height: 100%;
+}
