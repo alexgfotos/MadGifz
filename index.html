@@ -57,9 +57,9 @@
             </div>
 
             </article>
-            <div id="fill-blank"></div>
+           
         </div>
-
+        <div id="fill-blank"></div>
         <footer>
             <div class="container footer">
                 <h1>
@@ -102,23 +102,24 @@
             for (var i = 0; i < totalCount; i++) {
 
                 if (i % 2 == 0) {
-                    console.log(madlibzValue[i]);
-                    var sentence = $("<h2>");
-                    sentence.text(madlibzValue[i]);
-                    $("#fill-blank").append(sentence);
+                    // console.log(madlibzValue[i]);
+                    // var sentence = $("<h2>");
+                    // sentence.text(madlibzValue[i]);
+                    $("#fill-blank").append(madlibzValue[i]);
 
-                    var image = $("<img>")
+                    var image = $("<img>");
                     image.attr("src", localStorage.getItem(i));
                     $("#fill-blank").append(image)
                     console.log(localStorage.getItem(i));
                     console.log(madlibzValue[i]);
 
 
+
                 }
                 else if (i % 2 == 1) {
-                    var sentence = $("<h2>");
-                    sentence.text(madlibzValue[i]);
-                    $("#fill-blank").append(sentence);
+                    // var sentence = $("<h2>");
+                    // sentence.text(madlibzValue[i]);
+                    $("#fill-blank").append(madlibzValue[i]);
 
                     var image = $("<img>")
                     image.attr("src", localStorage.getItem(i));

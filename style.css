@@ -4,6 +4,12 @@ body {
     text-align: center;
 }
 
+img {
+    height: 130px;
+    margin: 10px;
+    display: inline-block;
+}
+
 .hero-body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     /* background-image: url("https://cdnb.artstation.com/p/assets/images/images/006/272/147/large/jack-oldham-mountain-galaxy-background-1.jpg?1497300224"); */
@@ -43,6 +49,7 @@ body {
     border-radius: 2rem;
 }
 
+
 #user-input {
     padding: 3rem;
     display: flex;
@@ -56,7 +63,12 @@ body {
 
 #fill-blank {
     font-family: 'Bree Serif', serif;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
 
 #prompt {
