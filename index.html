@@ -76,6 +76,7 @@
         })
 
         // global variables to be used in JS
+        var inputs = [];
         var madlibz;
         var count = 0;
         var madlibzValue = [];
@@ -103,17 +104,34 @@
 
                     // create html for img and append
                     var image = $("<img>");
+                    var middle = $("<div>");
+                    var secretText = $("<p>")
+                    middle.attr("class", "middle")
+                    secretText.attr("class", "secret")
+                    secretText.text(inputs[i]);
                     image.attr("src", localStorage.getItem(i));
-                    $("#fill-blank").append(image)
+                    image.attr("alt", inputs[i]);
+                    middle.append(secretText)
+                    middle.append(image)
+                    $("#fill-blank").append(middle)
+                   
                     
                 }
                 else if (i % 2 == 1) {
 
                     $("#fill-blank").append(madlibzValue[i]);
 
-                    var image = $("<img>")
+                    var image = $("<img>");
+                    var middle = $("<div>");
+                    var secretText = $("<p>")
+                    middle.attr("class", "middle")
+                    secretText.attr("class", "secret")
+                    secretText.text(inputs[i]);
                     image.attr("src", localStorage.getItem(i));
-                    $("#fill-blank").append(image)                   
+                    image.attr("alt", inputs[i]);
+                    middle.append(secretText)
+                    middle.append(image)
+                    $("#fill-blank").append(middle)                  
 
                 }
 
@@ -126,7 +144,9 @@
 
             // set blank as pulled and trimmed value from input
             var blank = $("#blank").val().trim();
-
+            inputs.push(blank);
+            console.log(inputs);
+            
             // use user input for giphy api query
             var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=mAZatgWo6T9hgzFNKRIFDeLp5AIdXStq&tag=" + blank;
             
@@ -148,7 +168,7 @@
                 // After the data from the AJAX request comes back
                 .then(function (response) {
 
-
+                    
                     // Saving the image_original_url property
                     var imageUrl = response.data.fixed_height_downsampled_url;
                     localStorage.setItem(count, imageUrl);

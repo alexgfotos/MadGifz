@@ -50,6 +50,15 @@ button {
     border-radius: 2rem;
 }
 
+.secret {
+    opacity: 0;
+    font-size: 1rem;
+    color: #FBDD6E;
+  }
+
+.middle:hover .secret {
+    opacity: 1;
+  }
 
 #user-input {
     padding: 3rem;
