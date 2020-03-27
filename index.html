@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
+    <!-- mobile responsive code -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <!-- google fonts link -->
     <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Shadows+Into+Light&display=swap" rel="stylesheet">
     <!--Bulma-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
@@ -16,50 +17,41 @@
 </head>
 
 <body>
+    <!-- header/hero for MADGIFZ -->
     <section class="hero">
         <div class="hero-body">
             <div class="container">
-                <h1 class="title">
+                <h1 class="title is-size-1-mobile">
                     MadGifz
                 </h1>
             </div>
         </div>
     </section>
-    <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="">
-                <h2>Your Libray</h2>
-            </a>
-            <div class="navbar-brand">
-                <a class="navbar-item" href="">
-                    <h2>Global Libray</h2>
-                </a>
-    </nav> -->
+
     <div class="background">
+        <!-- container for input-box -->
         <div id="user-input" class="container">
             <div class="box">
-                <article class="media">
-                    <div class="media-left">
+                <article class="media level"></article>
+                <div class="media-content" id="userInput">
+                    <div id="prompt" class="content has-text-centered">
+                        <strong>Create a MadGif!</strong>
                     </div>
-                    <div class="media-content" id="userInput">
-                        <div id = "prompt" class="content">
-                            <strong>Create a MadGif!</strong>
+                    <!-- search field/prompt -->
+                    <input id="blank" class="input is-rounded" type="text" placeholder="Rounded input">
+                    <!-- submit/next button -->
+                    <div class="level">
+                        <div id="button-div" class="level-item">
+                            <button id="next-button" class="button is-warning">Next</button>
                         </div>
-                        <input id="blank" class="input is-rounded" type="text" placeholder="Rounded input">
-
-                        <button id="next-button" class="button is-warning">Next</button>
-                        <nav class="level is-mobile">
-
-                            </span>
-                            </a>
                     </div>
-
+                </div>
+                </article>
             </div>
-
-            </article>
-           
         </div>
+        <!-- div where madgif is generated -->
         <div id="fill-blank"></div>
+        <!-- simple footer -->
         <footer>
             <div class="container footer">
                 <h1>
@@ -68,18 +60,14 @@
             </div>
         </footer>
     </div>
-    </div>
-    </div>
-    </nav>
 
-
-
-
-
-
+    <!-- jquery link -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- our JS -->
     <script type="text/javascript">
 
+        // listener for when "enter" is pressed on keyboard to click next
         $("#blank").keyup(function (event) {
             if (event.keyCode === 13) {
                 $("#next-button").click();
@@ -87,75 +75,65 @@
             }
         })
 
+        // global variables to be used in JS
         var madlibz;
         var count = 0;
         var madlibzValue = [];
+        
+        // function to reset count and localstorage at page load
         function startGame() {
             count = 0;
-           localStorage.clear();
+            localStorage.clear();
         }
+
+        // function to pull sentences with GIFS in the blank values
         function generate() {
+            // hide the entire prompt and input
             $(".box").hide();
-            console.log("generate");
+            
+            // set total count to stored count
             var totalCount = parseInt(localStorage.getItem("totalCount"));
-            console.log(totalCount, madlibzValue);
+            
+            // loop that alternates even and odd outputs for the length of totalCount
             for (var i = 0; i < totalCount; i++) {
 
                 if (i % 2 == 0) {
-                    // console.log(madlibzValue[i]);
-                    // var sentence = $("<h2>");
-                    // sentence.text(madlibzValue[i]);
+                    // append sentence in HTML
                     $("#fill-blank").append(madlibzValue[i]);
 
+                    // create html for img and append
                     var image = $("<img>");
                     image.attr("src", localStorage.getItem(i));
                     $("#fill-blank").append(image)
-                    console.log(localStorage.getItem(i));
-                    console.log(madlibzValue[i]);
-
-
-
+                    
                 }
                 else if (i % 2 == 1) {
-                    // var sentence = $("<h2>");
-                    // sentence.text(madlibzValue[i]);
+
                     $("#fill-blank").append(madlibzValue[i]);
 
                     var image = $("<img>")
                     image.attr("src", localStorage.getItem(i));
-                    $("#fill-blank").append(image)
-                    console.log(localStorage.getItem(i));
-                    console.log(madlibzValue[i]);
+                    $("#fill-blank").append(image)                   
 
                 }
 
             }
 
         }
-        // Event listener for our cat-button
+        // Event listener for our next-button
         $("#next-button").on("click", function () {
             event.preventDefault();
 
+            // set blank as pulled and trimmed value from input
             var blank = $("#blank").val().trim();
+
+            // use user input for giphy api query
             var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=mAZatgWo6T9hgzFNKRIFDeLp5AIdXStq&tag=" + blank;
+            
+            // clear search term from input
             $("#blank").val("");
 
-            if (count > madlibz.blanks.length) {
-                $("#next-button").hide();
-                var finishButton = $("<button>");
-                finishButton.text("Finish!");
-                finishButton.attr("class", "button");
-                $("#input-box").append(finishButton);
-
-                finishButton.on("click", function () {
-                    generate();
-                })
-
-
-
-
-            }
-
+            // pull next madlib prompt from madlibz API and display as placeholder text
             $("#blank").attr("placeholder", madlibz.blanks[count])
 
 
@@ -173,37 +151,37 @@
 
                     // Saving the image_original_url property
                     var imageUrl = response.data.fixed_height_downsampled_url;
-                    console.log(response)
-                    console.log(imageUrl);
-
                     localStorage.setItem(count, imageUrl);
                     count++;
 
-
+                    // if statement to complete game when all blanks are entered
                     if (count == localStorage.getItem("count")) {
 
-                        console.log("the end");
+                        // hide input and next button
+                        $("#blank").hide();
                         $("#next-button").hide();
+
+                        // create and display submit button
                         var submit = $("<button>");
                         submit.attr("class", "button is-success");
                         submit.attr("id", "submit");
                         submit.text("Submit");
-                        $("#userInput").append(submit);
+                        $("#button-div").append(submit);
+
                     }
+
+                    // event listener for submit button
                     $("#submit").on("click", function () {
                         event.preventDefault();
-                        console.log("submit");
-                        generate();
-                        console.log(madlibzValue);
+
+                        // run generate function
+                        generate();                    
                     })
                 });
 
         });
 
-
         // madlibs AJAX
-
-
         var madlibzURL = "https://madlibz.herokuapp.com/api/random";
 
         // Perfoming an AJAX GET request to our queryURL
@@ -211,33 +189,35 @@
             url: madlibzURL,
             method: "GET"
         })
+
+        // After the call completes, run this code:
             .then(function (madlibzResponse) {
                 console.log(madlibzResponse)
                 madlibz = madlibzResponse
 
-                // // Prepending the value and blanks to the html
-
+                
                 var blanksCount = 0;
                 var valuesCount = 0;
 
+                // Alternating for loop for the length of both values and blanks to store the data
                 for (var i = 0; i < madlibzResponse.value.length + madlibzResponse.blanks.length; i++) {
 
                     if (i % 2 == 0) {
-                        console.log(madlibzResponse.value[valuesCount]);
                         madlibzValue.push(madlibzResponse.value[valuesCount]);
                         valuesCount++
+
                     } else if (i % 2 == 1 && blanksCount < madlibzResponse.blanks.length) {
                         console.log(madlibzResponse.blanks[blanksCount]);
                         blanksCount++
                     }
+
+                    // storing the counts locally
                     localStorage.setItem("count", blanksCount);
                     localStorage.setItem("totalCount", blanksCount + valuesCount);
                     localStorage.setItem("valuesCount", valuesCount);
                 }
-                // $("#fill-blank").append(response.value);
-                // $("#fill-blank").append(response.blanks);
-
-
+                
+                // initial placeholder text propagation
                 $("#blank").attr("placeholder", madlibzResponse.blanks[0]);
 
 
@@ -246,7 +226,7 @@
 
 
 
-
+        // run the startgame function!
         startGame()
 
     </script>

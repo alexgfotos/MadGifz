@@ -1,5 +1,4 @@
 body {
-    /* color: white; */
     font-size: 20px;
     text-align: center;
 }
@@ -10,22 +9,24 @@ img {
     display: inline-block;
 }
 
+button {
+    margin-top: 1rem;
+}
+
 .hero-body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    /* background-image: url("https://cdnb.artstation.com/p/assets/images/images/006/272/147/large/jack-oldham-mountain-galaxy-background-1.jpg?1497300224"); */
     width:100%;
    
 }
  .title{
      color:#FBDD6E;
-     font-size: 8rem;
+     font-size: 7rem;
      font-family:'Shadows Into Light', cursive;
      text-shadow: 2px 2px #000000;
      
  }
  
 .footer {
-    /* /* position: absolute; */
     bottom:0; 
     background-attachment: scroll;
     width: 100%;
@@ -54,11 +55,7 @@ img {
     padding: 3rem;
     display: flex;
     justify-content: center;
-    width: 90vh;
-}
-
-#next-button {
-    margin-top: 1rem;
+    width: 90vw;
 }
 
 #fill-blank {
@@ -74,5 +71,7 @@ img {
 #prompt {
     color: white ;
 }
+
+
 /* font-family: 'Shadows Into Light', cursive;
 font-family: 'Bree Serif', serif; */
