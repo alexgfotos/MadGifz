@@ -52,8 +52,8 @@ button {
 
 .secret {
     opacity: 0;
-    font-size: 1rem;
-    color: #FBDD6E;
+    font-size: 1.2rem;
+    color: red;
   }
 
 .middle:hover .secret {
